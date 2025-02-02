@@ -32,10 +32,22 @@ number_start = 48 #"0"のASCIIコード
 #メモリ消費を抑える時はグローバル空間に書く
 def main():
     x = int_input()
-    if x == 0:
-        print(1)
-    else:
-        print(0)
+
+    cand = set()
+    for dig in range(1, 19):
+        for first in range(10):
+            for second in range(10):
+                now = str(first) + str(second)
+                for i in range(3, dig + 1):
+                    diff = second - first
+                    if 0 <= diff + int(now[-1]) <= 9:
+                        now += str(diff + int(now[-1]))
+                cand.add(int(now))
+    cand = sorted(list(cand))
+
+    idx = bisect_left(cand, x)
+    print(cand[idx])
+
 
 if __name__ == '__main__':
     main()

@@ -18,41 +18,40 @@ def str_input(): return input()
 def str_map(): return input().split()
 def str_list(): return list(str_map())
 def str_row(N): return [str_input() for _ in range(N)]
-def str_row_list(N): return [list(str_input()) for _ in range(N)]
+def str_row_list(N): return [list(str_map()) for _ in range(N)]
 def lcm(a, b): return a * b // gcd(a, b)
 sys.setrecursionlimit(10 ** 9)
 INF = float('inf')
 MOD = 10 ** 9 + 7
 
 def main():
-    while True:
-        w, h = int_map()
-        if (w, h) == (0, 0):
-            break
-        c = int_row_list(h)
+    R, C, K = int_map()
+    grid = [[0] * (C + 1) for _ in range(R + 1)]
+    for i in range(K):
+        r, c, v = int_map()
+        grid[r][c] = v
+    #print(g)
 
-        def dfs(x, y):
-            if not (0 <= x < h) or not (0 <= y < w) or c[x][y] == 0:
-                return
+    dp = [[[0] * 4 for _ in range(C + 1)] for _ in range(R + 1)]
 
-            c[x][y] = 0
-            dfs(x + 1, y)
-            dfs(x - 1, y)
-            dfs(x, y + 1)
-            dfs(x, y - 1)
-            dfs(x - 1, y - 1)
-            dfs(x - 1, y + 1)
-            dfs(x + 1, y - 1)
-            dfs(x + 1, y + 1)
-        
-        count = 0
-        for i in range(h):
-            for j in range(w):
-                if c[i][j] == 0:
-                    continue
-                dfs(i, j)
-                count += 1
-        print(count)
+    for i in range(R + 1):
+        for j in range(C + 1):
+            for k in range(4):
+                if i - 1 >= 0:
+                    dp[i][j][0] = max(dp[i][j][0], dp[i - 1][j][k])
+                    dp[i][j][1] = max(dp[i][j][1], dp[i - 1][j][k] + grid[i][j])
+                if j - 1 >= 0:
+                    dp[i][j][k] = max(dp[i][j][k], dp[i][j - 1][k])
+                    if k - 1 >= 0:
+                        dp[i][j][k] = max(dp[i][j][k], dp[i][j - 1][k - 1] + grid[i][j])
+
+    for i in range(R + 1):
+        print(dp[i])
+
+    ans = 0
+    for k in range(4):
+        ans = max(ans, dp[-1][-1][k])
+    print(ans)
 
 if __name__ == '__main__':
     main()
