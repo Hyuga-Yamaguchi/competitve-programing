@@ -15,7 +15,7 @@ def int_row_list(N):
 
 
 def str_input():
-    return input()[:-1]
+    return input()
 
 
 def str_list():
@@ -31,21 +31,8 @@ def str_row_list(N):
 
 
 def main():
-    while True:
-        [x, y] = int_list()
-
-        if [x, y] == [0, 0]:
-            break
-
-        cnt = 0
-        for i in range(1, x + 1):
-            for j in range(i + 1, x + 1):
-                for k in range(j + 1, x + 1):
-                    if i + j + k == y:
-                        cnt += 1
-
-        print(cnt)
+    [a, b, c, x, y] = int_list()
 
 
 if __name__ == "__main__":
-    main()
+    print(main())

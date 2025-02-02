@@ -15,7 +15,7 @@ def int_row_list(N):
 
 
 def str_input():
-    return input()[:-1]
+    return input()
 
 
 def str_list():
@@ -31,21 +31,20 @@ def str_row_list(N):
 
 
 def main():
-    while True:
-        [x, y] = int_list()
+    s = str_input()
 
-        if [x, y] == [0, 0]:
-            break
+    max_len = 0
+    cur_len = 0
 
-        cnt = 0
-        for i in range(1, x + 1):
-            for j in range(i + 1, x + 1):
-                for k in range(j + 1, x + 1):
-                    if i + j + k == y:
-                        cnt += 1
+    for char in s:
+        if char in "ATGC":
+            cur_len += 1
+            max_len = max(max_len, cur_len)
+        else:
+            cur_len = 0
 
-        print(cnt)
+    return max_len
 
 
 if __name__ == "__main__":
-    main()
+    print(main())

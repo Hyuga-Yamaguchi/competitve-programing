@@ -15,7 +15,7 @@ def int_row_list(N):
 
 
 def str_input():
-    return input()[:-1]
+    return input()
 
 
 def str_list():
@@ -31,21 +31,20 @@ def str_row_list(N):
 
 
 def main():
-    while True:
-        [x, y] = int_list()
+    [n, m] = int_list()
+    a = int_row_list(n)
 
-        if [x, y] == [0, 0]:
-            break
+    max_score = 0
+    for song1 in range(m):
+        for song2 in range(m):
+            sum_score = 0
+            for student in range(n):
+                sum_score += max(a[student][song1], a[student][song2])
+            if sum_score > max_score:
+                max_score = sum_score
 
-        cnt = 0
-        for i in range(1, x + 1):
-            for j in range(i + 1, x + 1):
-                for k in range(j + 1, x + 1):
-                    if i + j + k == y:
-                        cnt += 1
-
-        print(cnt)
+    return max_score
 
 
 if __name__ == "__main__":
-    main()
+    print(main())

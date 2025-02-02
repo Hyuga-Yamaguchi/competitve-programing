@@ -31,21 +31,19 @@ def str_row_list(N):
 
 
 def main():
-    while True:
-        [x, y] = int_list()
+    n = int_input()
 
-        if [x, y] == [0, 0]:
-            break
+    cnt = 0
+    for i in range(1, n + 1, 2):
+        div = 0
+        for j in range(1, i + 1):
+            if i % j == 0:
+                div += 1
+        if div == 8:
+            cnt += 1
 
-        cnt = 0
-        for i in range(1, x + 1):
-            for j in range(i + 1, x + 1):
-                for k in range(j + 1, x + 1):
-                    if i + j + k == y:
-                        cnt += 1
-
-        print(cnt)
+    return cnt
 
 
 if __name__ == "__main__":
-    main()
+    print(main())
