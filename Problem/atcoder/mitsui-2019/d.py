@@ -31,17 +31,23 @@ def str_row_list(N):
 
 
 def main():
-    [a, b, c, x, y] = int_list()
+    n = int_input()
+    s = str_input()
 
-    min_xy = min(x, y)
-    cost = min_xy * 2 * c if a + b >= 2 * c else min_xy * (a + b)
+    secrets = [f"{i:03d}" for i in range(1000)]
+    count = 0
 
-    if x > y:
-        cost += min(a * (x - y), 2 * c * (x - y))
-    else:
-        cost += min(b * (y - x), 2 * c * (y - x))
+    for secret in secrets:
+        idx = 0
+        for char in s:
+            if idx == 3:
+                break
+            if secret[idx] == char:
+                idx += 1
+        if idx == 3:
+            count += 1
 
-    return cost
+    return count
 
 
 if __name__ == "__main__":
