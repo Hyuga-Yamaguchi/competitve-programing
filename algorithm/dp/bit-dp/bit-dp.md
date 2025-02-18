@@ -1,4 +1,4 @@
-# Segment DP
+# Bit DP
 
 ## 問題
 

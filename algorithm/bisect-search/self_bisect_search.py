@@ -53,3 +53,41 @@ for ti in test_input:
     print("\tself_bisect_right:", self_bisect_right(arr, target))
     print("\tbisect.bisect_right:", bisect_right(arr, target))
     print("")
+
+"""
+Input: {'arr': [11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67], 'target': 44}
+	self_bisect_left: 10
+	bisect.bisect_left: 10
+	self_bisect_right: 10
+	bisect.bisect_right: 10
+
+Input: {'arr': [11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67], 'target': 47}
+	self_bisect_left: 10
+	bisect.bisect_left: 10
+	self_bisect_right: 11
+	bisect.bisect_right: 11
+
+Input: {'arr': [11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67], 'target': 11}
+	self_bisect_left: 0
+	bisect.bisect_left: 0
+	self_bisect_right: 1
+	bisect.bisect_right: 1
+
+Input: {'arr': [11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67], 'target': 67}
+	self_bisect_left: 14
+	bisect.bisect_left: 14
+	self_bisect_right: 15
+	bisect.bisect_right: 15
+
+Input: {'arr': [11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67], 'target': 9}
+	self_bisect_left: 0
+	bisect.bisect_left: 0
+	self_bisect_right: 0
+	bisect.bisect_right: 0
+
+Input: {'arr': [11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67], 'target': 70}
+	self_bisect_left: 15
+	bisect.bisect_left: 15
+	self_bisect_right: 15
+	bisect.bisect_right: 15
+"""
