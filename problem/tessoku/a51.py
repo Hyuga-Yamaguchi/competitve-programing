@@ -48,24 +48,73 @@ def grid_input(h):
     return [list(input().strip()) for _ in range(h)]
 
 
+def query_input(n, case_arg_types):
+    """
+    n: Number of queries
+    case_arg_types: Args types list for case number
+    """
+    queries = []
+    for _ in range(n):
+        parts = input().split()
+        case_num = parts[0]
+
+        arg_types = case_arg_types.get(case_num, [])
+        args = [arg_type(value) for arg_type, value in zip(arg_types, parts[1:])]
+
+        queries.append((case_num, args))
+
+    return queries
+
+
+from collections import deque
+
+
+class Stack:
+    def __init__(self):
+        self.stack = deque()
+
+    def push(self, value):  # O(1)
+        self.stack.append(value)
+
+    def pop(self):  # O(1)
+        if not self.stack:
+            return None
+        return self.stack.pop()
+
+    def top(self):  # O(1)
+        if not self.stack:
+            return None
+        return self.stack[-1]
+
+    def size(self):
+        return len(self.stack)
+
+    def empty(self):
+        return len(self.stack) == 0
+
+    def show(self):
+        return list(self.stack)
+
+
 def string_join(sep, arr):
     return sep.join(map(str, arr))
 
 
 def main():
     q = int_input()
-    queries = str_row_list(q)
+    queries = query_input(q, {"1": [str], "2": [], "3": []})
 
-    stack = deque()
+    s = Stack()
     ans = []
+    for case, args in queries:
 
-    for query in queries:
-        if query[0] == "1":
-            stack.append(query[1])
-        elif query[0] == "2":
-            ans.append(stack[-1])
+        if case == "1":
+            val = args[0]
+            s.push(val)
+        elif case == "2":
+            ans.append(s.top())
         else:
-            stack.pop()
+            s.pop()
 
     return string_join("\n", ans)
 

@@ -48,25 +48,73 @@ def grid_input(h):
     return [list(input().strip()) for _ in range(h)]
 
 
+def query_input(n, case_arg_types):
+    """
+    n: Number of queries
+    case_arg_types: Args types list for case number
+    """
+    queries = []
+    for _ in range(n):
+        parts = input().split()
+        case_num = parts[0]
+
+        arg_types = case_arg_types.get(case_num, [])
+        args = [arg_type(value) for arg_type, value in zip(arg_types, parts[1:])]
+
+        queries.append((case_num, args))
+
+    return queries
+
+
+from collections import deque
+
+
+class Queue:
+    def __init__(self):
+        self.queue = deque()
+
+    def push(self, value):  # O(1)
+        self.queue.append(value)
+
+    def pop(self):  # O(1)
+        if not self.queue:
+            return None
+        return self.queue.popleft()
+
+    def front(self):  # O(1)
+        if not self.queue:
+            return None
+        return self.queue[0]
+
+    def size(self):
+        return len(self.queue)
+
+    def empty(self):
+        return len(self.queue) == 0
+
+    def show(self):
+        return list(self.queue)
+
+
 def string_join(sep, arr):
     return sep.join(map(str, arr))
 
 
 def main():
     q = int_input()
-    queries = str_row_list(q)
+    queries = query_input(q, {"1": [str], "2": []})
 
-    queue = deque()
+    qu = Queue()
     ans = []
+    for case, args in queries:
 
-    for query in queries:
-        case = query[0]
         if case == "1":
-            queue.append(query[1])
+            val = args[0]
+            qu.push(val)
         elif case == "2":
-            ans.append(queue[0])
+            ans.append(qu.front())
         else:
-            queue.popleft()
+            qu.pop()
 
     return string_join("\n", ans)
 

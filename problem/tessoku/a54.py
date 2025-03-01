@@ -48,12 +48,68 @@ def grid_input(h):
     return [list(input().strip()) for _ in range(h)]
 
 
+def query_input(n, case_arg_types):
+    """
+    n: Number of queries
+    case_arg_types: Args types list for case number
+    """
+    queries = []
+    for _ in range(n):
+        parts = input().split()
+        case_num = parts[0]
+
+        arg_types = case_arg_types.get(case_num, [])
+        args = [arg_type(value) for arg_type, value in zip(arg_types, parts[1:])]
+
+        queries.append((case_num, args))
+
+    return queries
+
+
 def string_join(sep, arr):
     return sep.join(map(str, arr))
 
 
+class UnorderedMap:
+    def __init__(self):
+        self.data = {}
+
+    def insert(self, key, value):
+        self.data[key] = value
+
+    def erase(self, key):
+        if key in self.data:
+            del self.data[key]
+
+    def find(self, key):
+        return self.data.get(key, None)
+
+    def size(self):
+        return len(self.data)
+
+    def empty(self):
+        return len(self.data) == 0
+
+    def show(self):
+        return list(self.data.items())
+
+
 def main():
-    pass
+    q = int_input()
+    queries = query_input(q, {"1": [str, int], "2": [str]})
+
+    scores = UnorderedMap()
+    ans = []
+
+    for case, args in queries:
+        if case == "1":
+            name, score = args
+            scores.insert(name, score)
+        else:
+            name = args[0]
+            ans.append(scores.find(name))
+
+    return string_join("\n", ans)
 
 
 if __name__ == "__main__":

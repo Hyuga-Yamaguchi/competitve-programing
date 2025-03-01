@@ -71,22 +71,60 @@ def string_join(sep, arr):
     return sep.join(map(str, arr))
 
 
+import heapq
+
+
+class PriorityQueue:
+    def __init__(self, heap_type="min"):
+        self.heap = []
+        self.heap_type = heap_type
+
+    def push(self, value):  # O(logN)
+        if self.heap_type == "max":
+            heapq.heappush(self.heap, -value)
+        else:
+            heapq.heappush(self.heap, value)
+
+    def pop(self):  # O(logN)
+        if not self.heap:
+            return None
+        if self.heap_type == "max":
+            return -heapq.heappop(self.heap)
+        return heapq.heappop(self.heap)
+
+    def top(self):  # O(1)
+        if not self.heap:
+            return None
+        if self.heap_type == "max":
+            return -self.heap[0]
+        return self.heap[0]
+
+    def size(self):
+        return len(self.heap)
+
+    def is_empty(self):
+        return len(self.heap) == 0
+
+    def show(self):
+        return self.heap
+
+
 def main():
     q = int_input()
     queries = query_input(q, {"1": [int], "2": []})
 
-    hq = []
+    hq = PriorityQueue("min")
     ans = []
 
     for case, args in queries:
 
         if case == "1":
             val = args[0]
-            heappush(hq, val)
+            hq.push(val)
         elif case == "2":
-            ans.append(hq[0])
+            ans.append(hq.top())
         else:
-            heappop(hq)
+            hq.pop()
 
     return string_join("\n", ans)
 
