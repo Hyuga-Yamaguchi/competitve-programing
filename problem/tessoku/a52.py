@@ -56,16 +56,17 @@ def main():
     q = int_input()
     queries = str_row_list(q)
 
-    stack = deque()
+    queue = deque()
     ans = []
 
     for query in queries:
-        if query[0] == "1":
-            stack.append(query[1])
-        elif query[0] == "2":
-            ans.append(stack[-1])
+        case = query[0]
+        if case == "1":
+            queue.append(query[1])
+        elif case == "2":
+            ans.append(queue[0])
         else:
-            stack.pop()
+            queue.popleft()
 
     return string_join("\n", ans)
 
