@@ -1,30 +1,3 @@
-# Data Structure
-
-## Stack
-
-```python
-S = deque() # 空のdequeを返す
-
-S.appned(x) # Sの一番上に要素を追加 O(1)
-S[-1] # Sの一番上の要素を取得 O(1)
-S.pop() # Sの一番上の要素を削除 O(1)
-len(S) # Sの要素数を取得 O(1)
-```
-
-## Queue
-
-```python
-Q = deque() # 空のdequeを返す
-
-Q.appned(x) # Sの最後尾に要素を追加 O(1)
-Q[0] # Sの先頭要素を取得 O(1)
-Q.popleft() # Sの先頭要素を削除 O(1)
-len(Q) # Sの要素数を取得 O(1)
-```
-
-## Priority Queue
-
-```python
 import heapq
 
 
@@ -61,4 +34,33 @@ class PriorityQueue:
 
     def show(self):
         return self.heap
-```
+
+
+min_pq = PriorityQueue("min")
+max_pq = PriorityQueue("max")
+
+# 要素を追加
+min_pq.push(5)
+min_pq.push(3)
+min_pq.push(8)
+min_pq.push(1)
+
+max_pq.push(5)
+max_pq.push(3)
+max_pq.push(8)
+max_pq.push(1)
+
+print("min_pq: ", min_pq.show())
+print("max_pq: ", max_pq.show())
+
+# 最小ヒープの動作確認
+print("Min Heap")
+print("Top (最小値):", min_pq.top())  # 1
+print("Pop:", min_pq.pop())  # 1
+print("Pop:", min_pq.pop())  # 3
+
+# 最大ヒープの動作確認
+print("\nMax Heap")
+print("Top (最大値):", max_pq.top())  # 8
+print("Pop:", max_pq.pop())  # 8
+print("Pop:", max_pq.pop())  # 5
