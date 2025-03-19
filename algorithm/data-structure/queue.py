@@ -18,13 +18,13 @@ class Queue:
             return None
         return self.queue[0]
 
-    def size(self):
+    def size(self):  # O(1)
         return len(self.queue)
 
-    def empty(self):
+    def empty(self):  # O(1)
         return len(self.queue) == 0
 
-    def show(self):
+    def show(self):  # O(N)
         return list(self.queue)
 
 

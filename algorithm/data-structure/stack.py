@@ -18,13 +18,13 @@ class Stack:
             return None
         return self.stack[-1]
 
-    def size(self):
+    def size(self):  # O(1)
         return len(self.stack)
 
-    def empty(self):
+    def empty(self):  # O(1)
         return len(self.stack) == 0
 
-    def show(self):
+    def show(self):  # O(N)
         return list(self.stack)
 
 

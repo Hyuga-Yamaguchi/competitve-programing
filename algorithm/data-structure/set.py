@@ -28,13 +28,13 @@ class Set:
     def end(self):  # us: -, os: O(1)
         return next(reversed(self.data), None) if self.ordered else None
 
-    def lower_bound(self, value):
+    def lower_bound(self, value):  # us: -, os: O(logN)
         if not self.ordered:
             return None
         idx = bisect.bisect_left(self.data, value)
         return self.data[idx] if idx < len(self.data) else None
 
-    def upper_bound(self, value):
+    def upper_bound(self, value):  # us: -, os: O(logN)
         if not self.ordered:
             return None
         idx = bisect.bisect_right(self.data, value)

@@ -6,7 +6,7 @@ class Map:
         self.ordered = ordered
         self.data = OrderedDict() if self.ordered else {}
 
-    def insert(self, key, value):  # O(NlogN)
+    def insert(self, key, value):  # um: O(1), om: O(NlogN)
         self.data[key] = value
         if self.ordered:
             self._sort()
@@ -24,12 +24,12 @@ class Map:
     def empty(self):  # O(1)
         return len(self.data) == 0
 
-    def begin(self):  # O(1)
+    def begin(self):  # um: - , om: O(1)
         if not self.ordered:
             return None
         return next(iter(self.data.items()), None)
 
-    def end(self):  # O(1)
+    def end(self):  # um: - , om: O(1)
         if not self.ordered:
             return None
         return next(reversed(self.data.items()), None)

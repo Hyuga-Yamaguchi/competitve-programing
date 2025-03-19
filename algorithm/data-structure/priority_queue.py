@@ -26,13 +26,13 @@ class PriorityQueue:
             return -self.heap[0]
         return self.heap[0]
 
-    def size(self):
+    def size(self):  # O(1)
         return len(self.heap)
 
-    def empty(self):
+    def empty(self):  # O(1)
         return len(self.heap) == 0
 
-    def show(self):
+    def show(self):  # O(N)
         return list(map(lambda x: -x if self.heap_type == "max" else x, self.heap))
 
 
